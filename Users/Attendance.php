@@ -2,6 +2,9 @@
 // Include security helpers
 require_once __DIR__ . '/includes/security_helpers.php';
 
+// Suppress notices and warnings in development (remove in production)
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+
 // Configure secure session
 configure_secure_session();
 
@@ -100,33 +103,70 @@ if(isset($_POST['apply_leave_submit']))
     $diff = (strtotime($to_date) - strtotime($from_date)) / (60*60*24) + 1;
     $no_of_days = max($diff, 0);
     
-    // (Optional) file attachment => `MedicalCertificate` column
+    // (Optional) file attachment => `MedicalCertificate` column - SECURE FILE UPLOAD
     $attachment_name = "";
     if(!empty($_FILES['leave_attachment']['name'])) {
-        $attachment_name  = basename($_FILES["leave_attachment"]["name"]);
-        $target_directory = "uploads/leaves/";  // ensure folder is writable
-        $target_file      = $target_directory . $attachment_name;
-        move_uploaded_file($_FILES["leave_attachment"]["tmp_name"], $target_file);
+        // Validate file upload
+        $allowed_extensions = ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx'];
+        $max_file_size = 5 * 1024 * 1024; // 5MB
+        
+        $file_info = pathinfo($_FILES["leave_attachment"]["name"]);
+        $file_extension = strtolower($file_info['extension'] ?? '');
+        
+        // Validate file extension
+        if (!in_array($file_extension, $allowed_extensions)) {
+            echo '<script>alert("Invalid file type. Allowed: PDF, JPG, PNG, DOC, DOCX");</script>';
+        }
+        // Validate file size
+        elseif ($_FILES["leave_attachment"]["size"] > $max_file_size) {
+            echo '<script>alert("File too large. Maximum size: 5MB");</script>';
+        }
+        // Validate upload errors
+        elseif ($_FILES["leave_attachment"]["error"] !== UPLOAD_ERR_OK) {
+            echo '<script>alert("File upload error. Please try again.");</script>';
+        }
+        else {
+            // Generate secure filename
+            $secure_filename = $StudentId . '_' . date('YmdHis') . '_' . uniqid() . '.' . $file_extension;
+            $target_directory = __DIR__ . "/uploads/leaves/";
+            
+            // Create directory if it doesn't exist
+            if (!is_dir($target_directory)) {
+                mkdir($target_directory, 0755, true);
+            }
+            
+            $target_file = $target_directory . $secure_filename;
+            
+            // Move uploaded file with error handling
+            if (move_uploaded_file($_FILES["leave_attachment"]["tmp_name"], $target_file)) {
+                $attachment_name = $secure_filename;
+            } else {
+                error_log("File upload failed for student: $StudentId");
+                echo '<script>alert("File upload failed. Please try again.");</script>';
+            }
+        }
     }
 
-    // Insert into Student_Leave_Transaction
-    // srno is auto_incr presumably, so not specified
-    $insert_leave_query = "
+    // Insert into Student_Leave_Transaction - SECURE WITH PREPARED STATEMENT
+    $stmt = mysqli_prepare($Con, "
         INSERT INTO Student_Leave_Transaction
         (sadmission, LeaveFrom, LeaveTo, LeaveType, remark, EntryDate, MedicalCertificate, source)
-        VALUES
-        (
-            '$StudentId',
-            '$from_date',
-            '$to_date',
-            '$leave_type',
-            '$reason',
-            CURDATE(),
-            '$attachment_name',
-            'Portal'  -- or 'mobile app', etc.
-        )
-    ";
-    mysqli_query($Con, $insert_leave_query) or die("Error inserting into Student_Leave_Transaction: " . mysqli_error($Con));
+        VALUES (?, ?, ?, ?, ?, CURDATE(), ?, 'Portal')
+    ");
+    
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "ssssss", $StudentId, $from_date, $to_date, $leave_type, $reason, $attachment_name);
+        
+        if (!mysqli_stmt_execute($stmt)) {
+            error_log("Leave insertion failed for student $StudentId: " . mysqli_stmt_error($stmt));
+            echo '<script>alert("Failed to submit leave application. Please try again.");</script>';
+        }
+        
+        mysqli_stmt_close($stmt);
+    } else {
+        error_log("Leave prepare statement failed: " . mysqli_error($Con));
+        echo '<script>alert("System error. Please contact administrator.");</script>';
+    }
     
     // Optionally redirect or show success
     // header("Location: Attendance.php?tab=leave&msg=LeaveApplied");

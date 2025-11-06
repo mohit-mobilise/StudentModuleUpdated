@@ -1,23 +1,41 @@
-# Error Handling Guide - MyFees.php Fix
+# Error Handling Guide - Bug Fixes
 
 **Issue Date:** November 6, 2025  
 **Status:** ✅ FIXED
+
+**Files Fixed:**
+1. Users/MyFees.php - Null array access & SQL injection
+2. Users/Attendance.php - File upload security & SQL injection
 
 ---
 
 ## 🔴 Issues Found
 
-### Error Messages Displayed:
+### 1. MyFees.php - Error Messages Displayed:
 ```
 Notice: Trying to access array offset on value of type null in MyFees.php on line 906
 Notice: Trying to access array offset on value of type null in MyFees.php on line 911
 ```
 
+### 2. Attendance.php - File Upload Error:
+```
+Warning: move_uploaded_file(D:\xampp\tmp\php928A.tmp to 'uploads/leaves/2026 eok class 3.pdf' 
+in D:\xampp\htdocs\Projects\StudentModuleUpdated\Users\Attendance.php on line 109
+```
+
 ### Root Causes:
 
-1. **Null Array Access** - Accessing array keys on null values
+**MyFees.php:**
+1. **Null Array Access** - Accessing array keys on null values when query returns no results
 2. **SQL Injection** - Direct variable usage in SQL queries
-3. **Error Display** - PHP errors visible to users (security risk)
+
+**Attendance.php:**
+1. **Insecure File Upload** - No validation, directory doesn't exist, path disclosure
+2. **SQL Injection** - Direct variable usage in INSERT query
+3. **Information Disclosure** - Using `die()` with database error messages
+
+**Both Files:**
+1. **Error Display** - PHP errors/warnings visible to users (security risk)
 
 ---
 
@@ -54,11 +72,130 @@ $sqlmonth_his = mysqli_stmt_get_result($stmt);
 
 ### 3. Suppressed Error Display (Development)
 
-Added to top of MyFees.php:
+Added to top of both MyFees.php and Attendance.php:
 ```php
 // Suppress notices in development (remove in production)
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 ```
+
+---
+
+## ✅ Attendance.php Fixes
+
+### 1. Secure File Upload (Lines 105-145)
+
+**Before (VULNERABLE):**
+```php
+if(!empty($_FILES['leave_attachment']['name'])) {
+    $attachment_name  = basename($_FILES["leave_attachment"]["name"]);
+    $target_directory = "uploads/leaves/";
+    $target_file      = $target_directory . $attachment_name;
+    move_uploaded_file($_FILES["leave_attachment"]["tmp_name"], $target_file);
+}
+```
+
+**Issues:**
+- ❌ No file type validation (can upload .php, .exe, etc.)
+- ❌ No file size check
+- ❌ No directory existence check
+- ❌ No error handling
+- ❌ Uses original filename (security risk)
+- ❌ Path disclosure in error messages
+
+**After (SECURE):**
+```php
+if(!empty($_FILES['leave_attachment']['name'])) {
+    // Validate file upload
+    $allowed_extensions = ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx'];
+    $max_file_size = 5 * 1024 * 1024; // 5MB
+    
+    $file_info = pathinfo($_FILES["leave_attachment"]["name"]);
+    $file_extension = strtolower($file_info['extension'] ?? '');
+    
+    // Validate file extension
+    if (!in_array($file_extension, $allowed_extensions)) {
+        echo '<script>alert("Invalid file type. Allowed: PDF, JPG, PNG, DOC, DOCX");</script>';
+    }
+    // Validate file size
+    elseif ($_FILES["leave_attachment"]["size"] > $max_file_size) {
+        echo '<script>alert("File too large. Maximum size: 5MB");</script>';
+    }
+    // Validate upload errors
+    elseif ($_FILES["leave_attachment"]["error"] !== UPLOAD_ERR_OK) {
+        echo '<script>alert("File upload error. Please try again.");</script>';
+    }
+    else {
+        // Generate secure filename
+        $secure_filename = $StudentId . '_' . date('YmdHis') . '_' . uniqid() . '.' . $file_extension;
+        $target_directory = __DIR__ . "/uploads/leaves/";
+        
+        // Create directory if it doesn't exist
+        if (!is_dir($target_directory)) {
+            mkdir($target_directory, 0755, true);
+        }
+        
+        $target_file = $target_directory . $secure_filename;
+        
+        // Move uploaded file with error handling
+        if (move_uploaded_file($_FILES["leave_attachment"]["tmp_name"], $target_file)) {
+            $attachment_name = $secure_filename;
+        } else {
+            error_log("File upload failed for student: $StudentId");
+            echo '<script>alert("File upload failed. Please try again.");</script>';
+        }
+    }
+}
+```
+
+**Security Improvements:**
+- ✅ File type whitelist (only PDF, images, documents)
+- ✅ File size limit (5MB max)
+- ✅ Upload error checking
+- ✅ Secure filename generation (prevents overwriting)
+- ✅ Directory auto-creation with proper permissions
+- ✅ Error logging instead of displaying details
+- ✅ Generic error messages to users
+
+### 2. Fixed SQL Injection (Lines 147-166)
+
+**Before (VULNERABLE):**
+```php
+$insert_leave_query = "
+    INSERT INTO Student_Leave_Transaction
+    (sadmission, LeaveFrom, LeaveTo, LeaveType, remark, EntryDate, MedicalCertificate, source)
+    VALUES ('$StudentId', '$from_date', '$to_date', '$leave_type', '$reason', CURDATE(), '$attachment_name', 'Portal')
+";
+mysqli_query($Con, $insert_leave_query) or die("Error: " . mysqli_error($Con));
+```
+
+**After (SECURE):**
+```php
+$stmt = mysqli_prepare($Con, "
+    INSERT INTO Student_Leave_Transaction
+    (sadmission, LeaveFrom, LeaveTo, LeaveType, remark, EntryDate, MedicalCertificate, source)
+    VALUES (?, ?, ?, ?, ?, CURDATE(), ?, 'Portal')
+");
+
+if ($stmt) {
+    mysqli_stmt_bind_param($stmt, "ssssss", $StudentId, $from_date, $to_date, $leave_type, $reason, $attachment_name);
+    
+    if (!mysqli_stmt_execute($stmt)) {
+        error_log("Leave insertion failed for student $StudentId: " . mysqli_stmt_error($stmt));
+        echo '<script>alert("Failed to submit leave application. Please try again.");</script>';
+    }
+    
+    mysqli_stmt_close($stmt);
+} else {
+    error_log("Leave prepare statement failed: " . mysqli_error($Con));
+    echo '<script>alert("System error. Please contact administrator.");</script>';
+}
+```
+
+**Security Improvements:**
+- ✅ Prepared statements prevent SQL injection
+- ✅ Errors logged to file, not displayed
+- ✅ Generic error messages to users
+- ✅ Proper statement cleanup
 
 ---
 
@@ -166,20 +303,34 @@ if ($result && isset($result['id'])) {
 
 ## 📋 Testing Checklist
 
-After making these changes, test:
-
+### MyFees.php Testing:
 - [ ] Page loads without errors
 - [ ] Payment history displays correctly
 - [ ] No error messages visible to users
-- [ ] Errors are logged to file (check `logs/error.log`)
 - [ ] SQL injection test fails (should not work)
 - [ ] Empty result sets don't cause errors
+
+### Attendance.php Testing:
+- [ ] Leave application form loads without errors
+- [ ] Can upload valid file types (PDF, JPG, PNG, DOC, DOCX)
+- [ ] Invalid file types are rejected (try .php, .exe)
+- [ ] Large files (>5MB) are rejected
+- [ ] Files are saved with secure filenames (not original names)
+- [ ] Directory `/uploads/leaves/` is created automatically
+- [ ] No error messages visible to users
+- [ ] Leave submission works correctly
+- [ ] SQL injection test fails (should not work)
+
+### General Testing:
+- [ ] Errors are logged to file (check `logs/error.log`)
+- [ ] No path disclosure in error messages
+- [ ] Generic error messages shown to users
 
 ---
 
 ## 🚀 Quick Test
 
-### 1. Test the fix:
+### 1. Test MyFees.php:
 Visit: `http://localhost/Projects/StudentModuleUpdated/Users/MyFees.php`
 
 **Expected:** 
@@ -187,11 +338,28 @@ Visit: `http://localhost/Projects/StudentModuleUpdated/Users/MyFees.php`
 - ✅ Page displays correctly
 - ✅ Payment information shows properly
 
-### 2. Check error logs:
+### 2. Test Attendance.php:
+Visit: `http://localhost/Projects/StudentModuleUpdated/Users/Attendance.php`
+
+**Test file upload:**
+1. Click "+ Apply Leave" button
+2. Fill in leave details
+3. Try uploading:
+   - ✅ Valid file (PDF, JPG) - should work
+   - ❌ Invalid file (.php, .exe) - should be rejected with alert
+   - ❌ Large file (>5MB) - should be rejected with alert
+
+**Expected:**
+- ✅ No error messages/warnings visible
+- ✅ Valid files upload successfully
+- ✅ Invalid files rejected with clear message
+- ✅ Files saved with secure names (check `/uploads/leaves/` folder)
+
+### 3. Check error logs:
 Location: `C:\xampp\logs\php_error.log` or `logs/error.log`
 
-### 3. Test SQL injection protection:
-Try manipulating URL parameters - should not cause errors or expose data.
+### 4. Test SQL injection protection:
+Try manipulating form inputs - should not cause errors or expose data.
 
 ---
 
