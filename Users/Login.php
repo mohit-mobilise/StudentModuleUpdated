@@ -56,6 +56,29 @@ $useragent=$_SERVER['HTTP_USER_AGENT'] ?? '';
 $suser = validate_input($_REQUEST["txtUserId"] ?? '', 'string', 50);
 $spassword = $_REQUEST["txtPassword"] ?? '';
 
+// Validate CSRF token if form is submitted
+if (!empty($_REQUEST["isSubmit"]) && $_REQUEST["isSubmit"] == "yes") {
+    if (!validate_csrf_token($_REQUEST['csrf_token'] ?? '')) {
+        echo '<script>
+        (function() {
+            function showToast() {
+                if (typeof toastr !== "undefined") {
+                    toastr.error("Invalid security token. Please try again.", "Security Error");
+                } else {
+                    setTimeout(showToast, 100);
+                }
+            }
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", showToast);
+            } else {
+                showToast();
+            }
+        })();
+        </script>';
+        $suser = ''; // Prevent login attempt
+    }
+}
+
 if ($suser != "")
 {
    // Use prepared statement to prevent SQL injection
@@ -318,6 +341,7 @@ if(document.getElementById("txtcuser").value.trim()=="")
                         </div>
                      <form name="frmLogin" id="frmLogin" method="post" class="login-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return Validate();">
                      <input type="hidden" name="isSubmit" id="isSubmit" value="yes">
+                     <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                      
                      <div class="form-group">
                          <label for="txtUserId">User ID / Admission Number</label>

@@ -50,8 +50,8 @@ if (($_REQUEST["isSubmit"] ?? '') == "yes") {
     }
 }
 
-// Fetch timetable data with teacher information
-$StudentClassEscaped = mysqli_real_escape_string($Con, $StudentClass);
+// Fetch timetable data with teacher information using prepared statement
+// $StudentClass is already from session and validated
 
 $ssqlTimetable = "
     SELECT 
@@ -67,16 +67,26 @@ $ssqlTimetable = "
         `time_table_teacher_class_mapping` ttc 
         ON tt.sclass = ttc.class AND tt.subject = ttc.subject
     WHERE 
-        tt.sclass = '$StudentClassEscaped'
+        tt.sclass = ?
     ORDER BY 
         FIELD(tt.weekday, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), 
         tt.daytime
 ";
 
-$resltTimetable = mysqli_query($Con, $ssqlTimetable);
+// Use prepared statement
+$stmtTimetable = mysqli_prepare($Con, $ssqlTimetable);
+if ($stmtTimetable) {
+    mysqli_stmt_bind_param($stmtTimetable, "s", $StudentClass);
+    mysqli_stmt_execute($stmtTimetable);
+    $resltTimetable = mysqli_stmt_get_result($stmtTimetable);
+} else {
+    error_log("Timetable query preparation failed: " . mysqli_error($Con));
+    $resltTimetable = false;
+}
 
 if(!$resltTimetable) {
-    die("Error fetching time table: " . mysqli_error($Con));
+    error_log("Error fetching time table: " . mysqli_error($Con));
+    die("Error fetching time table. Please try again later.");
 }
 
 // Organize the timetable data by weekdays

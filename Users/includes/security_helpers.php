@@ -234,6 +234,111 @@ function generate_secure_filename($original_filename, $prefix = '') {
     return $filename;
 }
 
+/**
+ * Secure file upload handler
+ * @param array $file $_FILES array element
+ * @param string $upload_directory Target upload directory (relative to Users/)
+ * @param string $prefix Optional filename prefix
+ * @param array $allowed_extensions Optional allowed extensions (default: images)
+ * @param int $max_size Maximum file size in bytes (default 5MB)
+ * @return array ['success' => bool, 'filename' => string, 'error' => string]
+ */
+function secure_file_upload($file, $upload_directory, $prefix = '', $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'pdf'], $max_size = 5242880) {
+    $result = ['success' => false, 'filename' => '', 'error' => ''];
+    
+    // Validate file upload
+    if (!isset($file) || !isset($file['error'])) {
+        $result['error'] = 'No file uploaded';
+        return $result;
+    }
+    
+    // Check for upload errors
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        switch ($file['error']) {
+            case UPLOAD_ERR_NO_FILE:
+                $result['error'] = 'No file uploaded';
+                break;
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                $result['error'] = 'File size exceeds limit';
+                break;
+            default:
+                $result['error'] = 'Upload error occurred';
+                break;
+        }
+        return $result;
+    }
+    
+    // Check file size
+    if ($file['size'] > $max_size) {
+        $result['error'] = 'File size exceeds maximum allowed size (' . ($max_size / 1048576) . 'MB)';
+        return $result;
+    }
+    
+    // Get file extension
+    $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    
+    // Validate file extension
+    if (!in_array($file_extension, $allowed_extensions)) {
+        $result['error'] = 'File type not allowed. Allowed types: ' . implode(', ', $allowed_extensions);
+        return $result;
+    }
+    
+    // Validate MIME type for images
+    if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])) {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime_type = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+        
+        $allowed_mime_types = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($mime_type, $allowed_mime_types)) {
+            $result['error'] = 'Invalid image file';
+            return $result;
+        }
+        
+        // Additional validation for images
+        $image_info = @getimagesize($file['tmp_name']);
+        if ($image_info === false) {
+            $result['error'] = 'Invalid image file';
+            return $result;
+        }
+    }
+    
+    // Generate secure filename
+    $secure_filename = $prefix . bin2hex(random_bytes(16)) . '.' . $file_extension;
+    
+    // Validate and create upload directory
+    $upload_path = rtrim($upload_directory, '/') . '/';
+    if (!file_exists($upload_path)) {
+        if (!mkdir($upload_path, 0755, true)) {
+            $result['error'] = 'Failed to create upload directory';
+            return $result;
+        }
+    }
+    
+    // Full target path
+    $target_file = $upload_path . $secure_filename;
+    
+    // Validate path doesn't contain directory traversal
+    $real_target_path = realpath(dirname($target_file));
+    $real_upload_path = realpath($upload_path);
+    
+    if ($real_target_path === false || $real_upload_path === false || strpos($real_target_path, $real_upload_path) !== 0) {
+        $result['error'] = 'Invalid upload path';
+        return $result;
+    }
+    
+    // Move uploaded file
+    if (move_uploaded_file($file['tmp_name'], $target_file)) {
+        $result['success'] = true;
+        $result['filename'] = $secure_filename;
+    } else {
+        $result['error'] = 'Failed to upload file';
+    }
+    
+    return $result;
+}
+
 ?>
 
 

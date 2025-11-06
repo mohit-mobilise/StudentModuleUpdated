@@ -171,18 +171,27 @@ if (isset($_REQUEST["isSubmit"]) && $_REQUEST["isSubmit"] == "yes") {
 
     // Apply date filters if provided
     if (!empty($_REQUEST["date_from"])) {
-        // It's crucial to sanitize inputs to prevent SQL injection
-        $date_from = mysqli_real_escape_string($Con, $_REQUEST["date_from"]);
-        $date_to = mysqli_real_escape_string($Con, $_REQUEST["date_to"]);
-        $ssql .= " AND `assignmentdate` >= '$date_from' 
-                   AND `assignmentdate` <= '$date_to' 
-                   AND `class` = '$StudentClass' 
+        // Use prepared statement to prevent SQL injection
+        $date_from = validate_input($_REQUEST["date_from"] ?? '', 'string', 20);
+        $date_to = validate_input($_REQUEST["date_to"] ?? '', 'string', 20);
+        $ssql .= " AND `assignmentdate` >= ? 
+                   AND `assignmentdate` <= ? 
+                   AND `class` = ? 
                    ORDER BY `datetime` DESC";
+        
+        $stmt = mysqli_prepare($Con, $ssql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "sss", $date_from, $date_to, $StudentClass);
+            mysqli_stmt_execute($stmt);
+            $reslt = mysqli_stmt_get_result($stmt);
+        } else {
+            error_log("Assignment query preparation failed: " . mysqli_error($Con));
+            $reslt = false;
+        }
     } else {
         $ssql .= " ORDER BY `datetime` DESC";
+        $reslt = mysqli_query($Con, $ssql);
     }
-
-    $reslt = mysqli_query($Con, $ssql);
 } else {
     // Fetch all active assignments for the class
     $ssql1 = "SELECT `subject`, `class`, `remark`, 
@@ -472,18 +481,27 @@ p.event-title.mb-0 {
                                             $srno = 0;
                                             if (isset($_REQUEST["isSubmit"]) && $_REQUEST["isSubmit"] == "yes") {
                                                 if (!empty($_REQUEST["date_from"]) && !empty($_REQUEST["date_to"])) {
-                                                    $date_from = mysqli_real_escape_string($Con, $_REQUEST["date_from"]);
-                                                    $date_to = mysqli_real_escape_string($Con, $_REQUEST["date_to"]);
+                                                    // Use prepared statement to prevent SQL injection
+                                                    $date_from = validate_input($_REQUEST["date_from"] ?? '', 'string', 20);
+                                                    $date_to = validate_input($_REQUEST["date_to"] ?? '', 'string', 20);
                                                     $ssqlHomework = "SELECT `srno`, `subject`, `homework`, 
                                                                         DATE_FORMAT(`homeworkdate`, '%d-%m-%Y') AS `homeworkdate`, 
                                                                         `homeworkimage` 
                                                                      FROM `homework_master` 
                                                                      WHERE `status` = 'Active' 
-                                                                       AND `sclass` = '$StudentClass' 
-                                                                       AND `homeworkdate` >= '$date_from' 
-                                                                       AND `homeworkdate` <= '$date_to' 
+                                                                       AND `sclass` = ? 
+                                                                       AND `homeworkdate` >= ? 
+                                                                       AND `homeworkdate` <= ? 
                                                                      ORDER BY `homeworkdate` DESC";
-                                                    $resHomework = mysqli_query($Con, $ssqlHomework);
+                                                    $stmtHomework = mysqli_prepare($Con, $ssqlHomework);
+                                                    if ($stmtHomework) {
+                                                        mysqli_stmt_bind_param($stmtHomework, "sss", $StudentClass, $date_from, $date_to);
+                                                        mysqli_stmt_execute($stmtHomework);
+                                                        $resHomework = mysqli_stmt_get_result($stmtHomework);
+                                                    } else {
+                                                        error_log("Homework query preparation failed: " . mysqli_error($Con));
+                                                        $resHomework = false;
+                                                    }
                                                     if ($resHomework) {
                                                         if (mysqli_num_rows($resHomework) > 0) {
                                                             while ($rowa = mysqli_fetch_assoc($resHomework)) {    
@@ -644,23 +662,31 @@ p.event-title.mb-0 {
                                             return $color;
                                         }
 
-                                        // Fetch notices directly from database
+                                        // Fetch notices directly from database using prepared statement
                                         $current_date = date('Y-m-d');
                                         $start_date = date('Y-m-d', strtotime('-3 months'));
                                         
-                                        // Escape student name for SQL query
-                                        $escapedName = mysqli_real_escape_string($Con, $name);
+                                        // Use prepared statement to prevent SQL injection
                                         $query = "SELECT `noticetitle`, `NoticeDate`, `noticefilename`, `srno`, 
                                                   `Attachment1URL`, `Attachment2URL`, `Attachment3URL` 
                                                   FROM `student_notice` 
-                                                  WHERE `sclass`='$StudentClass' AND `status`='Active' 
-                                                  AND `sname` IN('All', '$escapedName') 
-                                                  AND `NoticeDate` BETWEEN '$start_date' AND '$current_date' 
+                                                  WHERE `sclass`=? AND `status`='Active' 
+                                                  AND (`sname`='All' OR `sname`=?) 
+                                                  AND `NoticeDate` BETWEEN ? AND ? 
                                                   ORDER BY `datetime` DESC LIMIT 10";
                                           
-                                        $sql = mysqli_query($Con, $query);
+                                        $stmtNotice = mysqli_prepare($Con, $query);
+                                        if ($stmtNotice) {
+                                            mysqli_stmt_bind_param($stmtNotice, "ssss", $StudentClass, $name, $start_date, $current_date);
+                                            mysqli_stmt_execute($stmtNotice);
+                                            $sql = mysqli_stmt_get_result($stmtNotice);
+                                        } else {
+                                            error_log("Notice query preparation failed: " . mysqli_error($Con));
+                                            $sql = false;
+                                        }
+                                        
                                         if (!$sql) {
-                                            die('Invalid query: ' . mysqli_error($Con));
+                                            error_log('Notice query failed: ' . mysqli_error($Con));
                                         }
 
                                         // Initialize counter for color cycling

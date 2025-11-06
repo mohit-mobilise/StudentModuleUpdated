@@ -36,7 +36,7 @@ function getDarkerColor($color) {
 
 // Handle AJAX Request for Filtering
 if (isset($_POST['action']) && $_POST['action'] == 'filter') {
-    $filter = mysqli_real_escape_string($Con, $_POST['filter']);
+    $filter = validate_input($_POST['filter'] ?? '', 'string', 10);
     $current_date = date('Y-m-d');
     $query = "";
 

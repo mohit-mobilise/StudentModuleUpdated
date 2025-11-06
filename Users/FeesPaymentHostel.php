@@ -25,13 +25,21 @@ $rsDiscount= mysqli_query($Con, $sstr);
 $ssql="select distinct `bank_name` from `bank_master` where status='1'";
 $rsBank	= mysqli_query($Con, $ssql);
 
-if ($_REQUEST["txtAdmissionNo"] != "")
+if (!empty($_REQUEST["txtAdmissionNo"]))
 {
-		$AdmissionNo=$_REQUEST["txtAdmissionNo"];
-		$sqlStudentDetail = "SELECT `sname` , `sclass` , `srollno`,`FinancialYear`,`previous_sclass`,`Hostel`,`DiscontType` FROM `student_master` where  `sadmission`='$AdmissionNo'";
+		// Use prepared statement to prevent SQL injection
+		$AdmissionNo = htmlspecialchars($_REQUEST["txtAdmissionNo"], ENT_QUOTES, 'UTF-8');
+		$sqlStudentDetail = "SELECT `sname` , `sclass` , `srollno`,`FinancialYear`,`previous_sclass`,`Hostel`,`DiscontType` FROM `student_master` where  `sadmission`=?";
 		
-		
-		$rs = mysqli_query($Con, $sqlStudentDetail);
+		$stmt = mysqli_prepare($Con, $sqlStudentDetail);
+		if ($stmt) {
+			mysqli_stmt_bind_param($stmt, "s", $AdmissionNo);
+			mysqli_stmt_execute($stmt);
+			$rs = mysqli_stmt_get_result($stmt);
+		} else {
+			error_log("Student detail query preparation failed: " . mysqli_error($Con));
+			$rs = false;
+		}
 		if (mysqli_num_rows($rs) > 0)
 		{
 			while($row = mysqli_fetch_row($rs))
@@ -1650,7 +1658,7 @@ function CalculateBalance()
 	<input type="hidden" name="CurrentFinancialYear" id="CurrentFinancialYear" value="<?php echo $CurrentFinancialYear; ?>">
 	<input type="hidden" name="StudentAdmissionfinancialyear" id="StudentAdmissionfinancialyear" value="<?php echo $FinancialYear; ?>">
 	<input type="hidden" name="FeeSubmissionFinancialYear" id="FeeSubmissionFinancialYear" value="">
-	<input type="hidden" name="txtAdmissionNo" id="txtAdmissionNo" value="<?php echo $_REQUEST["txtAdmissionNo"]; ?>">
+	<input type="hidden" name="txtAdmissionNo" id="txtAdmissionNo" value="<?php echo htmlspecialchars($_REQUEST["txtAdmissionNo"] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
 	<input type="hidden" name="hStudentDiscountType" id="hStudentDiscountType" value="<?php echo $StudentDiscountType;?>">
 	
 	<table border="1px" width="100%">
@@ -1666,7 +1674,7 @@ function CalculateBalance()
 
 		<td style="width: 157px; height: 29px;" class="auto-style23">
 
-		<input type="text" name="txtAdmissionNo" id="txtAdmissionNo" size="15" style="width: 151px;" class="auto-style1" value="<?php echo $_REQUEST["txtAdmissionNo"]; ?>"></td>
+		<input type="text" name="txtAdmissionNo" id="txtAdmissionNo" size="15" style="width: 151px;" class="auto-style1" value="<?php echo htmlspecialchars($_REQUEST["txtAdmissionNo"] ?? '', ENT_QUOTES, 'UTF-8'); ?>"></td>
 
 		<td style="width: 157px; height: 29px;" class="auto-style26">
 

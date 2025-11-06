@@ -97,6 +97,12 @@
    
    // Handle form submission
    if(isset($_POST['submit'])) {
+       // Validate CSRF token
+       if (!validate_csrf_token($_POST['csrf_token'] ?? '')) {
+           echo "<script>toastr.error('Invalid security token. Please refresh and try again.', 'Security Error');</script>";
+           exit;
+       }
+       
        $remarks = ''; // Empty remarks for approve
        $consent_status = 'approved';
        
@@ -177,10 +183,16 @@
    }
    
    if(isset($_POST['reject'])) {
+       // Validate CSRF token
+       if (!validate_csrf_token($_POST['csrf_token'] ?? '')) {
+           echo "<script>toastr.error('Invalid security token. Please refresh and try again.', 'Security Error');</script>";
+           exit;
+       }
+       
        if(empty($_POST['remarks'])) {
            echo "<script>alert('Please provide remarks for rejection');</script>";
        } else {
-           $remarks = mysqli_real_escape_string($Con, $_POST['remarks']);
+           $remarks = validate_input($_POST['remarks'], 'string', 500); // Use prepared statements below
            $consent_status = 'rejected';
            
            // Handle photo upload for rejection
@@ -325,6 +337,7 @@
                         </div>
                         <div class="card-body">
                             <form name="consent_form" id="consent_form" method="POST" action="" class="form-horizontal" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                     <tr>
@@ -574,6 +587,7 @@
             </div>
             <div class="modal-body">
             <form id="editForm" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">

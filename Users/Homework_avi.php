@@ -75,16 +75,27 @@ if (isset($_REQUEST["isSubmit"]) && $_REQUEST["isSubmit"] == "yes") {
               FROM `assignment` 
               WHERE `status` = 'Active'";
     if (!empty($_REQUEST["date_from"])) {
-        $date_from = mysqli_real_escape_string($Con, $_REQUEST["date_from"]);
-        $date_to = mysqli_real_escape_string($Con, $_REQUEST["date_to"]);
-        $ssql .= " AND `assignmentdate` >= '$date_from' 
-                   AND `assignmentdate` <= '$date_to' 
-                   AND `class` = '$StudentClass' 
+        // Use prepared statement to prevent SQL injection
+        $date_from = validate_input($_REQUEST["date_from"] ?? '', 'string', 20);
+        $date_to = validate_input($_REQUEST["date_to"] ?? '', 'string', 20);
+        $ssql .= " AND `assignmentdate` >= ? 
+                   AND `assignmentdate` <= ? 
+                   AND `class` = ? 
                    ORDER BY `datetime` DESC";
+        
+        $stmt = mysqli_prepare($Con, $ssql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "sss", $date_from, $date_to, $StudentClass);
+            mysqli_stmt_execute($stmt);
+            $reslt = mysqli_stmt_get_result($stmt);
+        } else {
+            error_log("Assignment query preparation failed: " . mysqli_error($Con));
+            $reslt = false;
+        }
     } else {
         $ssql .= " ORDER BY `datetime` DESC";
+        $reslt = mysqli_query($Con, $ssql);
     }
-    $reslt = mysqli_query($Con, $ssql);
 } else {
     $ssql1 = "SELECT `subject`, `class`, `remark`, 
                       DATE_FORMAT(`assignmentdate`, '%d-%m-%Y') AS `assignmentdate`, 
@@ -263,8 +274,9 @@ $chart_data_json = json_encode($chart_data);
                                             $srno = 0;
                                             if (isset($_REQUEST["isSubmit"]) && $_REQUEST["isSubmit"] == "yes") {
                                                 if (!empty($_REQUEST["date_from"]) && !empty($_REQUEST["date_to"])) {
-                                                    $date_from = mysqli_real_escape_string($Con, $_REQUEST["date_from"]);
-                                                    $date_to = mysqli_real_escape_string($Con, $_REQUEST["date_to"]);
+                                                    // Use prepared statement to prevent SQL injection
+                                                    $date_from = validate_input($_REQUEST["date_from"] ?? '', 'string', 20);
+                                                    $date_to = validate_input($_REQUEST["date_to"] ?? '', 'string', 20);
                                                     $ssqlHomework = "SELECT `srno`, `subject`, `homework`, 
                                                                         DATE_FORMAT(`homeworkdate`, '%d-%m-%Y') AS `homeworkdate`, 
                                                                         `homeworkimage` 
