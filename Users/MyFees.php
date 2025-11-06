@@ -1,6 +1,10 @@
 <?php 
 require '../connection.php';
 require '../AppConf.php';
+
+// Suppress notices in development (remove this in production - use proper error handling)
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -898,26 +902,33 @@ $rsmisc = mysqli_query($Con, $ssqlmisc);
                     
                   // }
 
-                  // $month_h = trim($monthname,",");
+                 // $month_h = trim($monthname,",");
 
-                  $sqlmonth_his = mysqli_query($Con, "SELECT DISTINCT `Month` FROM `fees_transaction` WHERE `receipt_no`='$receipt_no' and `status`='1' and `fy`='$CurrentFY' ORDER BY `srno` limit 1 ");
+                 // Use prepared statement to prevent SQL injection
+                 $stmt = mysqli_prepare($Con, "SELECT DISTINCT `Month` FROM `fees_transaction` WHERE `receipt_no`=? and `status`='1' and `fy`=? ORDER BY `srno` ASC LIMIT 1");
+                 mysqli_stmt_bind_param($stmt, "ss", $receipt_no, $CurrentFY);
+                 mysqli_stmt_execute($stmt);
+                 $sqlmonth_his = mysqli_stmt_get_result($stmt);
+                 $rsmonth_his = mysqli_fetch_assoc($sqlmonth_his);
+                 $month_h = $rsmonth_his['Month'] ?? ''; // Use null coalescing operator
+                 mysqli_stmt_close($stmt);
 
-                  $rsmonth_his = mysqli_fetch_assoc($sqlmonth_his);
-                  $month_h = $rsmonth_his['Month'];
+                 $stmt1 = mysqli_prepare($Con, "SELECT DISTINCT `Month` FROM `fees_transaction` WHERE `receipt_no`=? and `status`='1' and `fy`=? ORDER BY `srno` DESC LIMIT 1");
+                 mysqli_stmt_bind_param($stmt1, "ss", $receipt_no, $CurrentFY);
+                 mysqli_stmt_execute($stmt1);
+                 $sqlmonth_his1 = mysqli_stmt_get_result($stmt1);
+                 $rsmonth_his1 = mysqli_fetch_assoc($sqlmonth_his1);
+                 $month_h1 = $rsmonth_his1['Month'] ?? ''; // Use null coalescing operator
+                 mysqli_stmt_close($stmt1);
 
-                  $sqlmonth_his1 = mysqli_query($Con, "SELECT DISTINCT `Month` FROM `fees_transaction` WHERE `receipt_no`='$receipt_no' and `status`='1' and `fy`='$CurrentFY' ORDER BY `srno` desc limit 1 ");
-                  
-                  $rsmonth_his1 = mysqli_fetch_assoc($sqlmonth_his1);
-                  $month_h1 = $rsmonth_his1['Month'];
-
-                  if ($month_h == $month_h1) {
-                      
-                      $month_his = $month_h;
-                  }
-                  else
-                  {
-                      $month_his = $month_h." to ".$month_h1;
-                  }
+                 if ($month_h == $month_h1) {
+                     
+                     $month_his = $month_h;
+                 }
+                 else
+                 {
+                     $month_his = !empty($month_h) && !empty($month_h1) ? $month_h." to ".$month_h1 : $month_h;
+                 }
 
 
                   if ($paid_amount != '') {
