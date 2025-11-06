@@ -1,0 +1,9 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="lucide:id-card">
+<g id="Group">
+<path id="Vector" d="M15.9999 10H17.9999M15.9999 14H17.9999M6.16992 15C6.37606 14.414 6.75902 13.9065 7.26594 13.5474C7.77286 13.1884 8.37873 12.9955 8.99992 12.9955C9.62111 12.9955 10.227 13.1884 10.7339 13.5474C11.2408 13.9065 11.6238 14.414 11.8299 15" stroke="#FCBD4C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M9 13C10.1046 13 11 12.1046 11 11C11 9.89543 10.1046 9 9 9C7.89543 9 7 9.89543 7 11C7 12.1046 7.89543 13 9 13Z" stroke="#FCBD4C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M20 5H4C2.89543 5 2 5.89543 2 7V17C2 18.1046 2.89543 19 4 19H20C21.1046 19 22 18.1046 22 17V7C22 5.89543 21.1046 5 20 5Z" stroke="#FCBD4C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

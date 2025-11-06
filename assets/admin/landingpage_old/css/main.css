@@ -1,0 +1,501 @@
+@media all {
+    .page-break	{ display: none; }
+}
+
+@media print {
+    .page-break	{ display: block; page-break-before: always; }
+}
+
+.dropdown {
+    color: black;
+    width: 200
+}
+
+.hide-column {
+    display: none
+}
+
+.holidaycss {
+    color: #FA5858;
+    font-size: 20px
+}
+
+.noholidaycss {
+    color: #81F781;
+    font-size: 20px
+}
+
+.action_hidden {
+    display: none;
+}
+
+.dropdown350 {
+    color: black;
+    width: 350
+}
+
+.dropdowntime {
+    color: black;
+    width: 90
+}
+
+.bluebutton {
+    color: #d9eef7;
+    border: solid 1px #0076a3;
+    background: #0095cd;
+    background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+    background: -moz-linear-gradient(top, #00adee, #0078a5);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#00adee', endColorstr = '#0078a5');
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+    height: 30px;
+}
+
+.examfilterdropdown {
+    color: black;
+    width: 150
+}
+
+.filterdropdown150 {
+    color: black;
+    width: 150
+}
+
+.filterdropdown100 {
+    color: black;
+    width: 100
+}
+
+.filterdropdown80 {
+    color: black;
+    width: 80
+}
+
+.textbox {
+    color: black;
+    width: 200
+}
+.textbox_300_50 {
+    color: black;
+    width: 300;
+    height: 50
+}
+.textbox_400 {
+    color: black;
+    width: 400
+}
+.textbox_600 {
+    color: black;
+    width: 400
+}
+.textbox_50 {
+    color: black;
+    width: 50
+}
+.textbox_25 {
+    color: black;
+    width: 25
+}
+
+.fts_filter150 {
+    color: black;
+    width: 150px
+}
+
+.textbox450 {
+    color: black;
+    width: 450
+}
+
+.textbox350 {
+    color: black;
+    width: 350
+}
+
+.markstextbox {
+    color: black;
+    width: 100%
+}
+
+.remarkstextbox {
+    color: black;
+    width: 100%
+}
+
+.marksremarkstextbox {
+    color: black;
+    width: 50
+}
+
+.textareabox {
+    color: black;
+    width: 350;
+    height: 40;
+}
+
+.textareabox700 {
+    color: black;
+    width: 700;
+    height: 60;
+}
+.textareabox500 {
+    color: black;
+    width: 500;
+    height: 60;
+}
+
+.textareabox700_80 {
+    color: black;
+    width: 700;
+    height: 80;
+}
+
+.textareabox800_120 {
+    color: black;
+    width: 800;
+    height: 120;
+}
+
+.mandatory {
+    color: red;
+}
+
+.breadcrumb {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.datafilter {
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.tableheaderdata {
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.columngroup {
+    background: #919191;
+    height: 23px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+}
+
+.panel_heading {
+    background: #919191;
+    height: 30px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+}
+
+.bluetextboldcolor {
+    height: 23px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    color: blue;
+}
+
+.greytextcolor {
+
+    margin: 0;
+    font-size: 11px;
+    text-align: center;
+    color: #808080;
+}
+
+.errorgroup {
+    background: red;
+    height: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+}
+
+.headerfooter {
+    background: #faa8e1;
+    display: block;
+    height: 20px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.headerlogo {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    text-align: center
+}
+
+.blackheaderlogo {
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    text-align: center
+}
+
+.userdetail {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    text-align: center
+}
+
+.blackuserdetail {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    text-align: center
+}
+
+#footer {
+    text-align: center;
+    font-size: 10px;
+    font-family: Verdana;
+    padding-top: 2px;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+}
+
+#errorfooter {
+    text-align: center;
+    font-size: 10px;
+    font-family: Verdana;
+    padding-top: 10px;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    z-index: 1;
+}
+
+.footertext {
+    font-size: 13px;
+    font-weight: bold;
+    text-align: right;
+    color: #FFFFFF;
+}
+
+.numbertext {
+    text-align: right;
+}
+
+.columnlabel {
+    font-weight: bold;
+    color: black;
+    width: 250px;
+}
+
+.columnlabel150 {
+    font-weight: bold;
+    color: black;
+    width: 150px;
+}
+
+.redcolumnlabel {
+    font-weight: bold;
+    color: red;
+}
+
+.redcolumnlabel_center {
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    font-size: 18px;
+}
+
+.bluecolumnlabel {
+    font-weight: bold;
+    color: blue;
+}
+
+.greencolumnlabel {
+    font-weight: bold;
+    color: green;
+}
+
+.redlabel {
+    font-weight: bold;
+    color: red;
+}
+
+.bluelabel {
+    color: blue;
+}
+
+.columnlabelcheckbox {
+    font-weight: bold;
+    color: black;
+    width: 250px;
+    height: 30px;
+}
+
+.columnlabel350 {
+    font-weight: bold;
+    color: black;
+    width: 350px;
+}
+
+.blackcolor {
+    color: black;
+}
+
+.button {
+    font-weight: bold;
+}
+
+.menu {
+    font-weight: bold;
+    background-color: transparent;
+    border: 0;
+    font-size: 17px;
+}
+
+.menuiconimages {
+    width: 20px;
+    height: 15px;
+    background-position: center;
+    border: 0;
+}
+
+.iconimages {
+    width: 25px;
+    height: 20px;
+    background-position: center center;
+    border: 0;
+}
+
+.studentimage {
+    width: 40px;
+    height: 40px;
+    background-position: center center;
+    border: 0;
+}
+
+.bookimage {
+    width: 60px;
+    height: 60px;
+    background-position: center center;
+    border: 0;
+}
+
+.studentimageedit {
+    width: 103px;
+    height: 103px;
+    background-position: center center;
+    border: 0;
+}
+
+.tabledata {
+    font-size: 13px;
+    overflow: auto;
+}
+
+.tabledata td {
+    vertical-align: middle;
+    padding: 3px;
+}
+
+/*****************Grid CSS **********************/
+.ui-jqgrid tr.jqgrow td {
+    vertical-align: middle;
+}
+
+button, .big-button {
+    white-space: nowrap;
+}
+
+.ui-jqgrid tr.jqgroup td {
+    vertical-align: middle;
+    font-size: 13px;
+    background-color: #f5f5dc;
+}
+
+.ui-widget-content a {
+    color: #3399CC;
+}
+
+.ui-autocomplete-category {
+    font-weight: bold;
+    padding: .2em .4em;
+    margin: .8em 0 .2em;
+    line-height: 1.0;
+    background-color: #BFBFBF;
+}
+
+.ui-autocomplete {
+    max-height: 125px;
+    width: 375px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+    height: 125px;
+    width: 375px;
+}
+
+.wrap {
+    text-align: center;
+}
+
+.img-zoom {
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+}
+
+.img-zoom2 {
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+}
+
+.img-zoom3 {
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+}
+
+.transition {
+    -webkit-transform: scale(4);
+    -moz-transform: scale(4);
+    -o-transform: scale(4);
+    transform: scale(4);
+}
+
+.transition2 {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+}
+
+.transition3 {
+    -webkit-transform: scale(3);
+    -moz-transform: scale(3);
+    -o-transform: scale(3);
+    transform: scale(3);
+}

@@ -1,0 +1,60 @@
+/*------------------part A------------------------*/
+.top-header-enrolment h4 {
+    font-size: 18;
+    font-weight: 500;
+}
+.top-header-enrolment label {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0;
+    line-height: 20px;
+}
+.top-header-enrolment label span {
+    font-size: 14px;
+}
+.top-header-enrolment p {
+    font-size: 14px;
+}
+.top-header-enrolment .form-control {
+    line-height: 2.4;
+    height: 35px;
+}
+.enrolment-header {
+    border-bottom: 2px solid #000;
+}
+.school-transport .form-group {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-around;
+}
+.parent-details tbody, td, tfoot, th, thead, tr {
+    border-color: #090909;
+    border-style: solid;
+    border-width: 1px;
+    height: 20px;
+    text-transform: uppercase;
+        font-family: cambria;
+
+}
+tbody, td, tfoot, th, thead, tr{
+    text-transform: uppercase;
+        font-family: cambria;
+
+}
+
+input[type="text"] {
+   height: 20px;
+}
+.parent-details th {
+    font-weight: 500;
+}
+.decleration-text li {
+    list-style: auto;
+    padding: 5px;
+}
+.decleration-text li {
+       list-style: decimal;
+    padding: 5px;
+
+}

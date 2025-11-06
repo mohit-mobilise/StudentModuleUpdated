@@ -1,0 +1,427 @@
+body{
+    background-color:ffffff;
+        font-family: "Trebuchet MS";
+}
+p{font-family: "Trebuchet MS";}
+h1,h2,h3,h4,h5,h6{font-family: "Trebuchet MS";}
+font{font-family: "Trebuchet MS";}
+/*----------LCSS------*/
+/*-------------------header css--------------*/
+header {
+    padding: 15px 24px;
+    border-bottom: 1px solid rgba(0, 42, 100, 0.20);
+    background: linear-gradient(0deg, rgba(3, 184, 187, 0.04) 0%, rgba(3, 184, 187, 0.04) 100%), #FFF;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.05);
+}
+.address-info p {
+    color: #152A06;
+    font-family: "Trebuchet MS";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom:0px;
+}
+.address-info i {
+    font-size: 12px;
+    padding-right: 4px;
+    color: #26A69A;
+}
+ h1 {
+    color: #152A06;
+    font-family: "Trebuchet MS";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom:0px;
+}
+.page-title {
+    padding-top: 22px;
+    padding-bottom: 40px;
+}
+#myTab li .nav-link {
+    color: #152A06;
+    font-family: "Trebuchet MS";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 0;
+    border: 0 none;
+    padding-bottom: 6px;
+}
+/*.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {*/
+/*      border:none;*/
+/*      border-bottom: 4px solid;*/
+/*      border-color:#26A69A;*/
+/*      outline: 0;*/
+/*}*/
+
+
+
+.nav-tabs .nav-link {
+    border:none;
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+     border:none;
+      border-bottom: 4px solid;
+      border-color:#26A69A;
+}
+/* #myTab .nav-link {*/
+/*    padding: 8px 10px 8px 0;*/
+/*}*/
+li .nav-item {
+    min-height:43px;
+}
+li.nav-item:focus-visible{
+   border-top:none; border-right:none;border-left:none; outline: 0;   
+}
+.form-check-input:checked {
+    background: #26A69A;
+    border-color: #26A69A;
+    
+}
+.form-check-input:active {
+    filter: brightness(90%);
+    background-color: #26A69A;
+    border-color: #26A69A;
+}
+.form-check-input:checked:before {
+    color: #fff;
+    content: "✔";
+    line-height: 20px;
+    text-align: center;
+    font-size: 12px;
+    margin: auto 25%;
+}
+label.form-label {
+    color: #152A06;
+    font-family: "Trebuchet MS";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+        margin-bottom: 4px;
+}
+label.form-label span {
+    color: #E30000;
+    font-family: Atma;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    padding-left: 3px;
+}
+input, optgroup, select, textarea {
+    height: 46px;
+    border-radius: 6px;
+    border: 1px solid rgba(21, 42, 6, 0.20);
+}
+.form-control-colmn {
+    padding: 0px 25px 28px 10px;
+}
+button.btn.btn-primary {
+    border-radius: 4px;
+    border: 1px solid #FFF;
+    background: #26A69A;
+    padding: 8px 12px;
+    text-align: center;
+    color: #FFF;
+    font-family: "Trebuchet MS";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+  float: right;
+}
+.form-actions {
+    background: #F5F6F9;
+    height: 99px;
+    padding: 33px 0px 32px 0px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.form-control {
+    line-height: 2.4;
+}
+h2.page-title {
+      color: #152A06;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    margin-bottom: 0;
+    line-height: normal;
+    padding-top: 20px;
+    padding-bottom: 0;
+}
+.profile-image {
+    /*width: 175px;*/
+    /*height: 176px;*/
+        border: 1px solid #e2e2e2;
+    border-radius: 2px;
+    background: url(<path-to-image>) lightgray -137.191px 0px / 240.741% 171.843% no-repeat;
+}
+.card-body {
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    background: #FFF;
+    padding: 24px;
+}
+.profile-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius:0;
+}
+
+.user-information h6 {
+    color: #152A06;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+
+
+footer {
+    text-align: center;
+    padding: 24px 0px;
+    border-top: 1px solid rgba(21, 42, 6, 0.20);
+    color: #152A06;
+    font-family: "Trebuchet MS";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.part1 p {
+    color: #152A06;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+}
+.part2 p {
+     font-weight: 500;
+       color: #152A06;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 16px;
+}
+.part3 p {
+    color: #152A06;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}
+button.btn.download-btn {
+     border-radius: 4px;
+    border: 1px solid #26A69A;
+    background: #FFF;
+    padding: 10px 24px;
+    color: #152A06;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+}
+
+.main-content-page {
+    margin: 22px 24px;
+}
+tbody p {
+    padding: 5px 0px;
+    display: block;
+    margin-bottom: 0;
+    color: #152A06;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+tbody td b {
+    font-weight: 500;
+    font-size: 13px;
+}
+    tbody, td, tfoot, th, thead, tr {
+    border-color: #ff1212;
+    border-style: solid;
+   border: 1px solid rgb(102 102 103) !important;
+}
+tbody td {
+    color: #152A06;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+}
+.top-sec-site-info p {
+    color: #152A06;
+    font-size: 16px;
+    font-style: normal;
+    padding-top: 10px;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom:0px;
+}
+/*---------------print page----------------------*/
+p.inner-info.text-left {
+    font-size: 14px;
+}
+
+.importent-note {
+    background: #F5F6F9;
+    margin-top: 25px;
+    text-align: center;
+    padding: 14px;
+}
+
+.importent-note p {
+    margin-bottom: 0;
+}
+.top-form-print {
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    background: #FFF;
+    padding: 22px 24px 30px 24px;
+}
+
+.bottom-form-print {
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    background: #FFF;
+    padding: 22px 24px 30px 24px;
+    margin-top: 15px;
+}
+
+/*----------------------registration page=--------------------*/
+.tab-icon {
+    width: 20px;  height: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin-right: 3px;
+}
+div#dividf13 p {
+    font-family: "Trebuchet MS";
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 100;
+    letter-spacing: 0.15px;
+}
+form#frmStudentReg .nav-tabs, .nav-pills {
+    margin-bottom: 10px;
+    justify-content: space-between;
+    padding: 0;
+}
+#myTab li .nav-link.active {
+    border-bottom: solid 4px #26A69A;
+}
+
+
+
+
+/*----------------------menu---------------------------------------style===============================*/
+ 
+    .sidebar {
+      background-color: #fff;
+      height: 100vh;
+    }
+    .sidebar a {
+      display: block;
+      padding: 10px 20px;
+      color: #333;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #ccebe8;
+      color: #000;
+      /*border-left: 5px solid #33cabb;*/
+    }
+    .header {
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+ 
+    .footer {
+      text-align: center;
+      font-size: 0.875rem;
+      color: #888;
+      padding: 15px 0;
+      background-color: #f8f9fc;
+    }
+    .download-btn {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    border: 1px solid #E0E0E0;
+    background: #F9FAFF;
+    }
+    .download-btn i {
+      margin-right: 8px;
+    }
+ 
+.form-check-input {
+    margin-top:0;
+    width:24px;
+    height:24px;
+}
+
+.font-trb li {
+    font-family:"Trebuchet MS";
+    font-size:16px;
+}
+
+img.mobile-logo {
+    display: none;
+    margin: auto;}
+img.desktop-logo {
+    display: block;}
+
+footer p {
+    margin-bottom: 0;
+}
+/*---------------------media  for small devicess---------------------------*/
+
+@media(max-width:992px){
+    .top-header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+
+/*-------------------------login page---------------------------*/
+.bg-white.left-side-bg {
+    display: none;
+}
+.forn_section {
+    background: #26a69a !important;
+    padding: 0;
+    margin: 0;
+}
+img.mobile-logo {
+    display: block;
+    margin: auto;}
+img.desktop-logo {
+    display: none;}
+
+}
+@media only screen and (min-width: 1400px) {
+  .container {
+    width: 1400px;
+  }
+  #myTab .nav-link {
+    padding: 8px 25px 8px 0;
+}
+}

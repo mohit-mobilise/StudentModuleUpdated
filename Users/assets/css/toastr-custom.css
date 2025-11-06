@@ -1,0 +1,121 @@
+/* 
+ * Toastr Custom Styles
+ * This file contains all custom styles to fix toastr display issues
+ * Include this file after toastr.min.css on all pages that use toastr
+ */
+
+/* Ensure toastr content is visible - override all conflicting styles */
+#toast-container {
+    z-index: 999999 !important;
+    position: fixed !important;
+}
+
+/* Remove icon space and ensure proper padding for text */
+#toast-container > div,
+#toast-container .toast {
+    padding: 15px !important;
+    padding-left: 15px !important;
+    padding-right: 40px !important;
+    background-image: none !important;
+    background-position: initial !important;
+    background-repeat: no-repeat !important;
+    min-width: 300px !important;
+    max-width: 400px !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    text-align: left !important;
+}
+
+/* Force title to be visible */
+#toast-container .toast-title,
+#toast-container div.toast-title {
+    font-weight: bold !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    margin-bottom: 8px !important;
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    text-indent: 0 !important;
+    text-align: left !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Force message to be visible */
+#toast-container .toast-message,
+#toast-container div.toast-message {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #ffffff !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    text-indent: 0 !important;
+    text-align: left !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Success toast */
+#toast-container .toast-success {
+    background-color: #51a351 !important;
+}
+#toast-container .toast-success .toast-title,
+#toast-container .toast-success .toast-message {
+    color: #ffffff !important;
+}
+
+/* Warning toast */
+#toast-container .toast-warning {
+    background-color: #f89406 !important;
+}
+#toast-container .toast-warning .toast-title,
+#toast-container .toast-warning .toast-message {
+    color: #ffffff !important;
+}
+
+/* Error toast */
+#toast-container .toast-error {
+    background-color: #bd362f !important;
+}
+#toast-container .toast-error .toast-title,
+#toast-container .toast-error .toast-message {
+    color: #ffffff !important;
+}
+
+/* Info toast */
+#toast-container .toast-info {
+    background-color: #2f96b4 !important;
+}
+#toast-container .toast-info .toast-title,
+#toast-container .toast-info .toast-message {
+    color: #ffffff !important;
+}
+
+/* Hide any icons, images, or placeholders */
+#toast-container img,
+#toast-container .toast-icon,
+#toast-container [class*="icon"],
+#toast-container::before,
+#toast-container > div::before {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Ensure close button is visible */
+#toast-container .toast-close-button {
+    color: #ffffff !important;
+    opacity: 0.8 !important;
+    text-indent: 0 !important;
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 20px !important;
+    line-height: 20px !important;
+    text-align: center !important;
+    background-image: none !important;
+}
+

@@ -1,0 +1,145 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.containerr {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+}
+
+.underline{
+    text-decoration: underline;
+    text-underline-offset: 8px;
+}
+
+h2, h3 {
+    font-weight: 700 !important;
+    text-align: center;
+    margin: 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+table, th, td {
+    border: 1px solid black !important;
+}
+table img{
+    height: 30px;
+}
+
+th{
+    text-align: center !important;
+}
+
+th, td {
+    padding: 4px 8px;
+}
+.header-table td {
+    text-align: left;
+}
+
+.progress-indicators th, .progress-indicators td {
+    padding: 4px 6px;
+    line-height: 20px;
+}
+
+.heading{
+    width: 100%;
+    padding: 3px 0;
+    margin: 20px auto;
+    margin-bottom: 0;
+    background-color: #3482bc;
+    border-radius: 10px;
+    border: 2px solid #143f5f;
+}
+
+.col1{
+    width: 45px;
+}
+
+.light-blue{
+    background-color: #c5e1ff;
+}
+
+.verticle-text{
+    padding: 0px 35px;
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
+}
+
+.green{
+    background-color: #ced54f;
+}
+
+.pink{
+    background-color: #f9a7b5;
+}
+
+.grey{
+    background-color: #b6c596;
+}
+
+.violet{
+    background-color: #e2d6f4;
+}
+
+.block{ 
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 70%;
+    margin: auto;
+    border: 2px solid #464646;
+    padding-top: 10px;
+}
+
+.block img{
+    height: 50px;
+}
+
+.yellow{
+    font-size: 60px;
+    color: #ffbd00;
+    text-decoration: underline;
+}
+
+h4{
+    font-size: 40px !important;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-align: center;
+    font-weight: 600 !important;
+}
+.border-bott{
+    border-bottom: 2px solid black !important;
+    margin-top: 45px;
+}
+
+.box{
+    border: 2px solid black !important;
+    border-radius: 20px;
+    font-size: 40px;
+    padding: 20px 30px;
+    margin-bottom: 80px;
+}
+
+.small-line{
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+}
+
+.textcenter{
+    text-align:center;
+}
+
+
+@media print{
+    
+table img{
+    height: 20px;
+}
+
+}

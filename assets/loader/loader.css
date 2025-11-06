@@ -1,0 +1,55 @@
+.dual-circle-loader {
+  position: relative;
+  width: 100px; /* Adjust as needed */
+  height: 100px; /* Adjust as needed */
+}
+  
+.inner-circle,
+.outer-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 5px solid transparent;
+  animation: spin 1.5s linear infinite;
+}
+  
+.inner-circle {
+  width: 60px; /* Smaller circle */
+  height: 60px;
+  top: 10px; /* Center the inner circle */
+  left: 10px;
+  border-top-color: #283897; /* Blue color */
+  animation: spin 2s linear infinite;
+}
+  
+.outer-circle {
+  width: 80px; /* Larger circle */
+  height: 80px;
+  border-top-color: #DA2020; /* Red color */
+  animation-direction: reverse; /* Rotate in the opposite direction */
+}
+
+.position-absolute{
+    position: absolute;
+    top: 50%;
+    margin: auto 50%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+  
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent black */
+  z-index: 9997; /* Higher than most Bootstrap components */
+ 
+}

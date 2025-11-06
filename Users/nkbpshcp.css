@@ -1,0 +1,903 @@
+@media (max-width: 1920px){
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+hr{
+    color: black;
+}
+
+h3{
+    text-align: center;
+    color: orangered;
+    margin:10px;
+}
+
+h5 {
+    text-align: center;
+    margin:10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+   
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 11px;
+    /*text-align: center;*/
+  
+}
+
+.childtd{
+    padding-top: 18px;
+}
+
+th,::after {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+   
+}
+
+th {
+    background-color: #ed7d31;
+    color: white;
+}
+
+input[type="checkbox"]{
+    height: 22px;
+    width: 22px;
+        
+}
+
+.flex-container{
+    margin: 0;
+    padding: 0;
+    font-family: Arial,sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.flex-box{
+    width: 215px;
+    height: 193px;
+    background: linear-gradient(white);
+    border: 2px solid #333;
+    margin: 10px;
+    position: absolute;
+    right: -7px;
+ 
+}
+
+.inputstyle{
+    border: none; border-bottom: 2px solid #333; width: 30%;
+}
+
+input:focus{
+    outline:none;
+    border: none;
+}
+
+td input[type="checkbox"] {
+     text-align: left;
+     /*width: 100%;*/
+     margin-bottom: 0px;
+}
+
+#feedbacktable tr:nth-child(even) {
+    background-color: #fcece8;; /* Alternate background color for even rows */
+  }
+  
+#feedbacktable tr:nth-child(odd) {
+    background-color: #f8d7cd /* Default background color for odd rows */
+}
+
+#datatable tr:nth-child(even) {
+    background-color: #fcece8;; /* Alternate background color for even rows */
+  }
+  
+#datatable tr:nth-child(odd) {
+    background-color: #f8d7cd /* Default background color for odd rows */
+}
+
+#performertable tr:nth-child(even) {
+    background-color: #fcece8; /* Alternate background color for even rows */
+}
+
+#performertable tr:nth-child(odd) {
+    background-color: #f8d7cd; /* Default background color for odd rows */
+  }
+
+.star{
+    justify-content: right end;
+    margin: 0;
+    padding: 0;
+    font-family: Arial,sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+
+.star ::after{
+    width: 200px;
+    height: 150px;
+    background: linear-gradient(white);
+    margin: 10px;
+  }
+
+.star img {
+    position: absolute;
+    right: 46px;
+    top: -219px;
+    width: 219px;
+}
+
+.question .bg-img {
+    position: relative;
+}
+
+.circle,.tdincenter{
+    text-align: center;
+}
+
+#studentName {
+    border: none;
+    border-bottom: 2px solid #333;
+    width: 65%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+#rollNo{
+    border: none; 
+    border-bottom: 2px solid #333;
+     width: 27%;
+   
+}
+
+.classdiv {
+    display: flex;
+    align-items: center; 
+}
+
+.label-group {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-left:10%;
+}
+
+.label-group1 {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    /*margin-left:10%;*/
+}
+
+        
+#regNo{
+    border: none; border-bottom: 2px solid #333; width: 22%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#class{
+    border: none;
+    
+}
+
+#section{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: none; border-bottom: 2px solid #333;
+}
+
+#Address{
+    border: none; 
+    border-bottom: 2px solid #333;
+    width: 85%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+#motherName{
+    border: none; border-bottom: 2px solid #333; width: 76%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+    
+}
+
+#motherEducation,#motherOccupation{
+    border: none; border-bottom: 2px solid #333; width: 28%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+    
+}
+
+#fatherName{
+    border: none; border-bottom: 2px solid #333; width: 76%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+#fatrherEducation,#fatherOccupation{
+    border: none; border-bottom: 2px solid #333; width: 28%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+#NumberOfSiblings,#SiblingsAge{
+    border: none; border-bottom: 2px solid #333; width: 35%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+#MotherTongue,#Mediumofnstruction{
+    border: none; border-bottom: 2px solid #333; width: 35%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+#place,#spentime,#verywell,#Iamresponsible,#careaboutothers{
+    border: none; border-bottom: 2px solid #333;width: 60%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+   
+}
+
+#Westayat,#Ilivewithmy,#section,#PhoneNo{
+    border: none;border-bottom: 2px solid;
+    margin-top: 10px;
+    margin-bottom: 20px;
+   
+    
+}
+
+#proudmyself{
+    border: none; border-bottom: 2px solid #333;width: 60%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+   
+}
+
+#mygoalsetting,#mylearnings,#iwill{
+    width: 100%; 
+    height: 10%;
+     text-align: center;
+      justify-content: center;
+       color: white;
+        background-color: #ed7d31; 
+        font-size: 200%;
+         border: 2px solid green;
+         margin-top: 15px;
+         margin-bottom: 15px;
+}
+
+#Iwillreachthisgoalby{
+    border: none; border-bottom: 2px solid #333;width: 60%;
+   
+}
+
+#containerbb,#containeraa,#containerss{
+    width:100%;display:flex;
+    width:100%;
+    width:100%; 
+   
+}
+
+#Myambition1,#Myambition2,#guidancefrom,#personhelpme{
+    border: none; border-bottom: 2px solid #333;width: 80%;
+    border: none; border-bottom: 2px solid #333;width: 50%;
+    border: none; border-bottom: 2px solid #333; width: 60%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+   
+}
+
+#learnnew,#Iwillfeel,#parentfeel{
+    border: none; border-bottom: 2px solid #333; width: 80%;
+    border: none; border-bottom: 2px solid #333;width: 50%;
+    border: none; border-bottom: 2px solid #333;width: 50%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+#colspanth{
+    text-align: left; color: black; background-color: #f8d7cd;
+   
+}
+
+#space,#termI,#termII{
+    background-color: #fcece8; width: 50%; text-align: right;
+    background-color: #fcece8; width: 20%; text-align: center; color: black;
+    background-color: #fcece8;text-align: center;color: black;
+   
+
+   
+}
+#colspan34{
+    text-align: left; color: black; background-color:#f8d7cd;
+   
+}
+
+#Building{
+    color: black; text-align: left;
+    background-color: #fcece8;
+    
+}
+
+#Building2{
+    background-color: #fcece8;
+    width:5%;
+}
+
+#Developing{
+background-color: #FFEBEE; color: black;text-align:left;
+
+}
+
+#Developing2{
+    background-color: #fcece8;
+    width:5%;
+    
+}
+
+#Managing{
+    background-color:#f8d7cd; color: black; text-align: left;
+}
+
+#Managing2{
+    background-color:#f8d7cd;
+}
+
+#skills{
+    text-align:left;
+    color: black;
+    background-color:#f8d7cd;
+}
+
+#skills2{
+    color: black;
+    background-color:#f8d7cd;
+}
+
+#Vocational{
+    background-color: #fcece8; color: black; text-align: left;
+    
+}
+
+#anyother,#check{
+    background-color: #fcece8; color: black;
+    background-color:#FFEBEE; color: black;
+    
+}
+
+#based{
+    text-align: left; color: white; font-size: x-large;
+    
+}
+
+#height{
+    color: black; background-color: #fcece8; height: 150px;
+}
+
+#performance{
+    background-color: #f8d7cd;
+    
+}
+
+#teachersfeedback{
+    text-align: center; color: white; font-size: large;
+
+    
+}
+
+#Area{
+    background-color:#f8d7cd; color:#FF6F00; width: 50%; text-align: left;
+    
+}
+
+#term{
+    background-color: #f8d7cd;color: black;
+}
+
+#Term{
+    background-color: #f8d7cd;color: black;
+  
+}
+
+#follow{
+    background-color: #fcece8; color: black; width: 50%; text-align: left;
+    
+}
+
+#one,#two{
+    background-color: #fcece8;color: black;
+    background-color: #fcece8;color: black;
+    
+}
+
+#independent{
+    background-color:#f8d7cd;color: black; width: 50%; text-align: left;
+    
+}
+
+#three,#four{
+    background-color:#f8d7cd;color: black;
+    background-color:#f8d7cd;color: black;
+    
+}
+
+#comm{
+    background-color: #fcece8;color: black; width: 50%; text-align: left;
+    
+}
+
+#five,#six{
+    background-color:#FFEBEE;color: black;
+    background-color:#FFEBEE;color: black;
+    
+}
+
+#solution{
+    background-color:#f8d7cd;color: black; width: 50%; text-align: left;
+    
+}
+
+#seven,#eight{
+     background-color:#f8d7cd;color: black;
+     background-color:#f8d7cd;color: black;
+    
+}
+
+#Empathy{
+    background-color: #fcece8;color: black; width: 50%; text-align: left;
+    
+}
+
+#nine,#ten{
+    background-color: #fcece8;color: black;
+    background-color: #fcece8;color: black;
+    
+}
+
+#Organization{
+    background-color:#f8d7cd;color: black; width: 50%; text-align: left;
+margin-top: 25px;
+margin-bottom: 25px;
+}
+
+#eleven,#twelve{
+     background-color:#f8d7cd;color: black;
+     background-color:#f8d7cd;color: black;
+    
+}
+
+#Collaboration{
+background-color: #FFEBEE;color: black; width: 50%; text-align: left;
+margin-top: 25px;
+margin-bottom: 25px;}
+
+#and,#or{
+    background-color:#FFEBEE;color: black;
+    background-color:#FFEBEE;color: black;
+    
+}
+
+#Response{
+    background-color:#f8d7cd;color: black; width: 50%; text-align: left;
+    
+}
+
+#thirteen,#fourteen{
+     background-color:#f8d7cd;color: black;
+     background-color:#f8d7cd;color: black;
+    
+}
+
+#create{
+    background-color: #fcece8;color: black; width: 50%; text-align: left;
+    
+}
+
+#fifteen,#sixteen{
+    background-color:#FFEBEE;color: black;
+    background-color:#FFEBEE;color: black;
+    
+}
+
+#concen{
+    background-color:#f8d7cd;color: black; width: 50%; text-align: left;
+    
+}
+#seventeen,#eighteen{
+    background-color:#f8d7cd;color: black;
+    background-color:#f8d7cd;color: black;
+    
+}
+
+#anyother{
+    background-color: #fcece8;color: black; width: 50%; text-align: left;
+    
+}
+
+#nineteen,#twenty{
+    background-color:#FFEBEE;color: black;
+    background-color:#FFEBEE;color: black;
+    
+}
+
+#barrier{
+    background-color:#f8d7cd; color: #FF6F00; width: 50%; text-align: left;
+    
+}
+
+#tone,#ttwo{
+     background-color:#f8d7cd;color: black;
+     background-color:#f8d7cd;color: black;
+    
+}
+
+#lack{
+    background-color: #fcece8;color: black; width: 50%; text-align: left;
+    
+}
+
+#tthree,#tfour{
+    background-color: #fcece8;color: black;
+    background-color: #fcece8;color: black;
+    
+}
+
+#motivation{
+    background-color:#f8d7cd;color: black; width: 50%; text-align: left;
+    
+}
+
+#tfive,#tsix{
+     background-color:#f8d7cd;color: black;
+     background-color:#f8d7cd;color: black;
+    
+}
+
+#preparation{
+    background-color: #fcece8;color: black; width: 50%; text-align: left;
+    
+}
+
+#tseven,#teight{
+    background-color:#FFEBEE;color: black;
+    background-color:#FFEBEE;color: black;
+    
+}
+
+#pressure{
+    background-color:#f8d7cd;color: black; width: 50%; text-align: left;
+    
+}
+
+#tnine,#tten{
+     background-color:#f8d7cd;color: black;
+     background-color:#f8d7cd;color: black;
+    
+}
+
+#goals{
+    background-color: #fcece8;color: black; width: 50%; text-align: left;
+    
+}
+
+#televen,#ttwelve{
+    background-color:#FFEBEE;color: black;
+    background-color:#FFEBEE;color: black;    
+                      
+}
+
+#issues{
+    background-color:#f8d7cd;color: black; width: 50%; text-align: left;
+    
+}
+
+#thirtteen,#tfourteen{
+     background-color:#f8d7cd;color: black;
+     background-color:#f8d7cd;color: black;
+    
+
+}
+
+#inclass{
+    background-color: #fcece8;color: black; width: 50%; text-align: left;
+    
+}
+
+#tfiveteen,#tsixteen{
+    background-color:#FFEBEE;color: black;
+    background-color:#FFEBEE;color: black;
+    
+}
+
+#injury{
+    background-color:#f8d7cd; color: black; width: 50%; text-align: left;
+    
+}
+
+#tseventeen,#teighteen{
+     background-color:#f8d7cd;color: black;
+     background-color:#f8d7cd;color: black;
+    
+}
+
+#none{
+    background-color: #fcece8;color: black; width: 50%; text-align: left;
+    
+}
+
+#tnineteen,#ttwenty{
+    background-color:#FFEBEE;color: black;
+    background-color:#FFEBEE;color: black;
+    
+}
+
+#other{
+    background-color:#f8d7cd;color: black; width: 50%; text-align: left;
+    
+
+}
+
+#others,#othersss{
+    background-color:#f8d7cd;color: black;
+    background-color:#f8d7cd;color: black;
+    
+}
+
+#colbottam{
+   text-align: center; color: white; font-size: large;
+   margin-top: 30px;
+   margin-bottom: 25px;
+}
+
+#ttterm1,#ttterm2{
+    background-color:#f8d7cd;color: black;
+    background-color:#f8d7cd;color: black;
+    
+}
+
+#ttterm3,#ttterm4{
+background-color: #FFEBEE;color: black; height: 150px;
+background-color: #FFEBEE;color: black;
+margin-top: 25px;
+margin-bottom: 25px;}
+
+.yes,.no,.sometimes,.notsure{
+    display: block;
+ }
+
+.d-flex {
+    display:flex;
+    width: 100%;
+    align-items: center;
+    height:28px;
+    /*justify-content: center;*/
+}
+
+.labelscheckbox{
+    width:50%;
+    text-align:left;
+}
+
+#B,#P,#A{
+    background-color: #fcece8;
+    background-color: #fcece8;
+    background-color: #fcece8;
+    color: #000000;
+}
+
+.fulltable,.fulltable2,.fulltable4{
+    margin-top:25px;
+}
+
+
+.fulltable3{
+    /* margin-top: 150px; */
+    margin-bottom: 50px;
+
+}
+
+.pdatadiv,.partA4,.partc,.sticky-button-print{
+    display:none;
+}
+
+.learnedthings{
+    border: none; border-bottom: 2px solid #333; width: 99%;
+}
+
+#academicgoal{
+    width:100%;
+}
+
+.sticky-button {
+    position: fixed;
+    top: 10px; 
+    right: 10px; 
+    padding: 10px 20px;
+    background-color: #20b2aa; /*lightseagreen */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sticky-button:hover {
+    background-color: darkcyan;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.sticky-button-print {
+    position: fixed;
+    top: 50px; 
+    right: 10px; 
+    padding: 10px 20px;
+    background-color: #f41e50ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sticky-button-print:hover {
+    background-color: #eb144682;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.goalsetting{
+    padding:10px;
+}
+
+.childneedanyother{
+    border: none;
+    border-bottom: 2px solid #333;
+    background-color:transparent;
+    font-weight:bold;
+    font-size:16px;
+    width:60%;
+}
+
+#teacherparentdiscuss{
+    width:99%;
+    background-color:transparent;
+}
+
+input[type="text"]{
+ font-family: Arial, Helvetica, sans-serif;
+} 
+
+.gradespan{
+    padding-left:90px;
+}
+
+.gradespan1{
+    padding-left:30px;
+}
+
+#dob{
+    width:25%;
+}
+
+#PhoneNo{
+    width:43%;
+}
+
+#Address1{
+    margin-left:68px;
+    border: none; 
+    border-bottom: 2px solid #333;
+    width: 35%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+#place{
+    width:83%;
+}
+
+.addendancetable{
+    height:31px;
+}
+
+textarea{
+        resize:none;
+}
+
+}
+
+
+@media print {
+#Ilivewithmy,.learnedthings,#studentName, #rollNo,#regNo,#class,#Address,#motherEducation,#motherOccupation,#motherName,#fatherName,#fatrherEducation,#fatherOccupation,#NumberOfSiblings,#SiblingsAge,#MotherTongue,#Mediumofnstruction,#place,#Ispendmyfreetimedoing,#verywell,#Iamresponsible,#careaboutothers,#Westayat,
+#proudmyself,#Iwillreachthisgoalby,#Myambition1,#Myambition2,#guidancefrom,#personhelpme,#learnnew,#Iwillfeel,#parentfeel{
+    border-bottom: 1px solid;
+   }
+
+#academicgoal{
+    width:100%;
+} 
+
+.sticky-button,.sticky-button-print{
+    display:none;
+}
+
+#Address{
+    width:90%;
+}
+
+#PhoneNo{
+    width:45%;
+}
+
+#motherName{
+    width:78%;
+}
+
+#fatherName{
+    width:78.5%;
+}
+
+#motherEducation,#fatrherEducation{
+    width:25%;
+}
+
+#motherOccupation{
+    width:25.3%;
+}    
+
+#fatherOccupation{
+    width:26%;
+}
+
+#SiblingsAge{
+    width:34%;
+}    
+
+#Mediumofnstruction{
+    width:31%;
+}  
+
+#place{
+    width:87%;
+}
+
+#teacherparentdiscuss{
+    border:none;
+    resize: none;
+}
+
+body {
+    zoom: 75%; /* Adjust zoom level for print */
+  }
+  }

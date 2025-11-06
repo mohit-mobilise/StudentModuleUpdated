@@ -1,0 +1,93 @@
+body{
+   color: #2a295c;
+    font-family: Open Sans, sans-serif;
+    
+} 
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-weight: 600;
+    line-height: 1.2;
+  font-family: Open Sans, sans-serif; 
+}
+h1, h2{
+    font-size:24px;
+}
+h3{
+    font-size:18px;
+}
+h4{
+    font-size:16px;
+}
+a,p,li{
+    font-weight: 400;
+    color: #2A295C;
+    font-size: 14px;
+}
+.left-side-bg {
+    background: url(../../assets/image/login-bg.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: inherit; 
+}
+.btn-primary{
+    border-radius: 4px;
+    border: 1px solid #283897;
+    background: #283897;
+    color:#fff;
+    padding: 6px 16px;
+}
+.btn-primary:hover{
+    border: 1px solid #283897;
+    background: #283897;
+}
+.btn-outlined {
+    padding: 6px 16px;
+    border-color: #283897;
+    color: #283897;
+    border-radius: 4px;
+    border: 1px solid #283897;
+}
+.login-body-text {
+    color: #283897;
+    max-width: 550px;
+    margin: 0px 15%;
+    padding-top: 50px;
+}
+.login-body-text label {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+.btn-primary:hover {
+    border: 1px solid #283897;
+    background: #283897;
+}
+.log-image {
+    height: 100vh;
+}
+.form-control {
+    border-radius: 4px;
+    border: 1px solid #283897;
+    color: #2a295c;
+    font-weight: 400;
+    padding: 20px;
+    width: 100%;
+}
+.footer-text {
+    text-align: center;
+    margin: auto;
+}
+form#frmLogin {
+    padding-top: 30px;
+}
+.modal-header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: 1px solid rgba(42, 41, 92, 0.15);
+    background: linear-gradient(0deg, rgba(25, 156, 218, 0.07) 0%, rgba(25, 156, 218, 0.07) 100%), #FFF;
+}
+select#fy {
+    padding: 5px;
+}

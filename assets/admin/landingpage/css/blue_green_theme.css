@@ -1,0 +1,124 @@
+/*colors used*/
+/*  #1E3F99 -- Header
+	#009933 -- Menu Border
+	#95C23D -- Menu
+	#1A0500
+*/
+
+/*colors used*/
+/*  #1E3F99 -- Header
+	#009933 -- Menu Border
+	#95C23D -- Menu
+	#1A0500
+*/
+
+
+/*Pagination Button */
+ul.controls-buttons li.controls-block,
+ul.controls-buttons li a,
+div.controls-buttons > div,
+div.controls-buttons > span,
+div.controls-buttons > a {
+    border-bottom: 4px solid #009933;
+    background:#95C23D;
+}
+
+/*Pagination Button Hover*/
+ul.controls-buttons li a:hover,
+ul.controls-buttons li a.current,
+div.controls-buttons > div:hover,
+div.controls-buttons > span:hover,
+div.controls-buttons > a:hover,
+div.controls-buttons > .current {
+    border-color: #009933;
+    background:#1E3F99;
+}
+
+.menuzord-menu>li>.megamenu{
+    background:#009933;
+}
+
+/* Form Focus */
+.form input[type=text]:focus,
+.form input[type=password]:focus,
+.form .input-type-text:focus,
+.form select:focus,
+.form textarea:focus {
+    border-color: #1E3F99;
+}
+
+
+#sub-nav > .container_12 > ul > li.with-menu, #sub-nav > .container_12 > ul > li.menu-opener {
+    background-color: #95C23D;
+}
+
+#header-bg {
+    background:#1E3F99;
+}
+
+.form input[type=text],
+.form input[type=password],
+.form .input-type-text {
+    border: 1px solid #95C23D;
+    border-bottom:4px solid #009933;
+}
+
+.form select,
+.form textarea {
+    border: 1px solid #95C23D;
+    border-bottom:4px solid #009933;
+}
+
+/******************** Button ********************/
+button,
+.big-button {
+    background: #95C23D;
+    border-bottom: 4px solid #009933;
+}
+button:hover,
+.big-button:hover {
+    border-color: #009933;
+    background:#1E3F99;
+}
+button:focus,
+.big-button:focus {
+    border-color: #009933;
+    background:#1E3F99;
+}
+/************* Navigation ******************/
+#sub-nav > .container_12 > ul > li.menu-opener .menu-arrow {
+    background-color: #95C23D;
+}
+#sub-nav > .container_12 > ul > li.menu-opener:hover .menu-arrow {
+    background:#009933;
+}
+#sub-nav {
+    border-top: 1px solid #95C23D;
+    border-bottom:5px solid #009933;
+    background: #95C23D;
+}
+#sub-nav a.nav-button:hover {
+    background: #6dc0e5;
+}
+.menu ul {
+    background: #95C23D;
+    border-left: 6px solid #009933;
+}
+.menu ul li:hover > a {
+    background:#009933;
+}
+
+#footer{
+    background: #95C23D;
+    padding:1px;
+}
+#breadcrumb {
+    background: #95C23D;
+}
+#breadcrumb li a:hover {
+    background:#1E3F99;
+}
+.block-content h1,
+.block-content .h1 {
+    background:#95C23D;
+}
