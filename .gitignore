@@ -20,5 +20,13 @@ logs/
 tmp/
 temp/
 
+# Security audit and documentation files
+SECURITY_AUDIT_*.md
+SECURITY_FIX_TIME_ESTIMATE.md
+CHANGELOG.md
+
+# System create files folder
+SystemCreateFile/
+
 
 
