@@ -78,10 +78,17 @@ $sqlHstlCalChk = mysqli_query($Con, "SELECT `fee_month_show_monthly` FROM `hoste
 $rsHstlCalChk = mysqli_fetch_assoc($sqlHstlCalChk);
 $hstl_fee_month_show_monthly = $rsHstlCalChk['fee_month_show_monthly'] ?? '';
 
-if($is_fees_access == '1') {
-    $sqlMonth = '';
+// Always load months for display, but access control is handled separately
+// Using prepared statement to prevent SQL injection
+$stmt_months = mysqli_prepare($Con, "SELECT `Month`,`Quarter` FROM `Fees_MonthQuaterMapping` WHERE `Class`=? and `fee_pay_status`='1' ORDER by `Priority`");
+if ($stmt_months) {
+    mysqli_stmt_bind_param($stmt_months, "s", $masterclass);
+    mysqli_stmt_execute($stmt_months);
+    $sqlMonth = mysqli_stmt_get_result($stmt_months);
+    mysqli_stmt_close($stmt_months);
 } else {
-    $sqlMonth = mysqli_query($Con, "SELECT `Month`,`Quarter` FROM `Fees_MonthQuaterMapping` WHERE `Class`='$masterclass' and `fee_pay_status`='1' ORDER by `Priority` ");
+    $sqlMonth = false;
+    error_log("Failed to prepare months query: " . mysqli_error($Con));
 }
 
 if($is_hostel_fee_access == '1') {
